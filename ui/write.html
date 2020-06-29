@@ -30,7 +30,7 @@
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
-<body>
+<body class="night">
   <nav class="navbar text-center navbar-light bg-dark text-white-50">
     <a class="navbar-brand mx-auto text-white-50" href="index.html">
       <h3>{</h3>
@@ -38,19 +38,19 @@
   </nav>
   <p></p>
   <div class="container h-100 mx-auto" id="app">
-    <form id="nakseo" @submit.prevent="writeItem">
+    <form id="nakseo" @submit.prevent="writeItem" class="bg-dark">
       <div class="form-group form-row">
         <div class="col-10">
-          <input type="text" class="form-control" id="title" name="title" v-model="nakseo.title" placeholder="제목" />
+          <input type="text" class="form-control text-light bg-dark" id="title" name="title" v-model="nakseo.title" placeholder="제목" />
         </div>
         <div class="col-2 align-self-end">
-          <input type="password" class="form-control" id="passwd" name="passwd" v-model="nakseo.passwd"
+          <input type="password" class="form-control text-light bg-dark" id="passwd" name="passwd" v-model="nakseo.passwd"
             placeholder="비밀번호" />
         </div>
       </div>
       <div class="form-group form-row">
         <div class="col-12">
-          <textarea id="summernote" class="form-control" name="content" v-model="nakseo.content"></textarea>
+          <textarea id="summernote" class="form-control text-light bg-dark" name="content" v-model="nakseo.content"></textarea>
         </div>
       </div>
       <div class="row">

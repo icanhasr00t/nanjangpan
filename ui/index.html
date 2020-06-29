@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="/assets/some.css">
 </head>
 
-<body>
+<body class="night">
   <nav class="navbar text-center navbar-light h-100 bg-dark text-white-50">
     <a class="navbar-brand mx-auto text-white-50" id="top" href=".">
       <h3>{</h3>
@@ -37,7 +37,7 @@
       으앙! 에러!
     </div>
 
-    <div class="card">
+    <div class="card bg-secondary text-light">
 		<div class="card-header d-flex justify-content-between align-items-center"> 난장판 
 			<a href="write.html" class="d-flex justify-content-end">
 				<img src="/assets/feather-pen.svg" height="20px" width="20px" title="낙서하기">
@@ -48,7 +48,7 @@
 	<!-- 글목록 -->
 	<div>
 		<ul class="list-group list-group-flush"> 
-		<li class="list-group-item d-flex justify-content-between" v-for="(item, index) in items">
+		<li class="list-group-item d-flex justify-content-between bg-dark text-light" v-for="(item, index) in items">
 		<div v-on:click="read(item.id)" class="col-10">{{ item.title }}
             <span class="badge badge-secondary badge-pill"
               v-if="item.replies > 0 && item.replies < 10">{{ item.replies }}</span>
@@ -106,7 +106,8 @@
     </div>
 <!-- container end -->
   </div>
-  <footer id="sticky-footer" class="py-2 h-100 bg-dark text-white-50">
+<br>
+  <footer id="sticky-footer" class="py-3 h-100 bg-dark text-white-50">
     <a class="text-white-50" href="#top"><div class="text-center">
       <h3> } </h3>
     </div>

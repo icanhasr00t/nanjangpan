@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="/assets/some.css">
 </head>
 
-<body class="bg-dark">
+<body>
     <nav class="navbar text-center navbar-light bg-dark h-100 text-white-50 mx-auto">
         <a class="navbar-brand mx-auto text-white-50" id="top" href="index.html">
             <h3>{</h3>
@@ -44,12 +44,14 @@
     </nav>
     <p></p>
     <div class="container h-100" id="app">
+
         <div class="row h-100 justify-content-center align-items-center">
             <!-- 낙서 -->
-            <div class="card bg-transparent h-100 w-100 text-secondary">
-                <h5 class="card-header text-light bg-secondary">{{ nakseo.title }}</h5>
+            <div class="card bg-transparent h-100 w-100">
+                <h5 class="card-header text-secondary ">{{ nakseo.title }}</h5>
                 <div class="card-body">
-                    <div class="container overflow-auto text-light" v-html="highlight(nakseo.body)">
+                    <!-- <p class="card-text"> -->
+                    <div class="container overflow-auto" v-html="highlight(nakseo.body)">
                     </div>
                     <!-- </p> -->
                     <div class="card-footer bg-transparent border-secondary">
@@ -94,7 +96,7 @@
 
             <!-- 댓글 -->
             <div class="input-group">
-                <input id="replyText" maxlength="256" v-on:keydown.enter="reply($event)" @keypress.enter.prevent v-model="nakseo.reply" type="text" class="form-control bg-dark text-light"
+                <input id="replyText" maxlength="256" v-on:keydown.enter="reply($event)" @keypress.enter.prevent v-model="nakseo.reply" type="text" class="form-control"
                     placeholder="댓글 쓰셈" aria-describedby="basic-addon2">
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary" type="button" v-on:click="reply()">
@@ -116,7 +118,7 @@
             </div>
 
             <ul class="list-group list-group-flush w-100">
-            	<li class="list-group-item bg-dark text-light" v-for="(reply, index) in replies">
+            	<li class="list-group-item" v-for="(reply, index) in replies">
                             <svg class="bi bi-arrow-return-right" width="1em" height="1em" viewBox="0 0 16 16"
                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
@@ -131,16 +133,16 @@
             <div class="modal fade" id="askPwd" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content bg-dark text-light">
+                    <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLongTitle">비번 주세요</h5>
-                            <button type="button" class="close text-secondary" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
                             <form id="passwdform">
-                                <input type="password" class="form-control bg-dark text-light" id="passwd" name="passwd"
+                                <input type="password" class="form-control" id="passwd" name="passwd"
                                     v-model="nakseo.passwd">
                             </form>
                         </div>
