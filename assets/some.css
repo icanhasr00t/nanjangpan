@@ -1,0 +1,18 @@
+#imgEdit svg:hover {
+  fill: red;
+}
+#imgReply svg:hover {
+  fill: red;
+}
+#imgTrash svg:hover {
+  fill: red;
+}
+#imgList svg:hover {
+  fill: red;
+}
+#sticky-footer {
+  flex-shrink: none;
+}
+html {
+  scroll-behavior: smooth;
+}

@@ -1,0 +1,26 @@
+{
+  "name": "nanjang",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www",
+    "test": "jest"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "express-fileupload": "^1.1.7-alpha.3",
+    "express-validator": "^6.5.0",
+    "helmet": "^3.23.1",
+    "morgan": "~1.9.1",
+    "pg": "^8.2.1",
+    "striptags": "^3.1.1"
+  },
+  "devDependencies": {
+    "jest": "^26.0.1",
+    "nodemon": "^2.0.4"
+  }
+}
