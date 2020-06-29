@@ -67,18 +67,20 @@ const validate = (req, checkId = true) => {
   }
 };
 
-const sanitizeBody = (body) => {
-  if (!body) {
-    throw new Error("invalid body");
+const sanitize = (data) => {
+  
+  if (!data) {
+    throw new Error("invalid data");
   }
 
   // stupid summernote
-  if (body === "<p><br></p>") {
-    throw new Error("invalid body");
+  if (data === "<p><br></p>") {
+    throw new Error("invalid data");
   }
 
-  const noevent = body.replace(/onerror|onabort|onload|onbeforeunload|onunload/gi,"");
-  const content = striptags(noevent, [
+  const noevent = data.replace(/onerror|onabort|onload|onbeforeunload|onunload/gi,"");
+  const nospecials = noevent.replace(/[\u2000-\u3000\u3164\u00A0\uFEFF]/g, '').trim();
+  const content = striptags(nospecials, [
     "img",
     "iframe",
     "a",
@@ -114,10 +116,29 @@ const sanitizeBody = (body) => {
   return content;
 };
 
+const check4EmptyStrings = (string) => {
+	const actual = string.replace(/[\u2000-\u3000\u3164\u00A0\uFEFF]/g, '').trim();
+	if (!actual || actual.length < 2) {
+		throw new Error('Invalid data');
+	}
+	return true;
+};
+
+const charToUnicode = function(str) {
+  if (!str) return false; // Escaping if not exist
+  var unicode = '';
+  for (var i = 0, l = str.length; i < l; i++) {
+    unicode += '\\' + str[i].charCodeAt(0).toString(16);
+  };
+  return unicode;
+}
+
 module.exports = {
   getFileName,
   isSafeFile,
   hasUnexpectedIframe,
   validate,
-  sanitizeBody,
+  sanitize,
+  charToUnicode,
+  check4EmptyStrings,
 };
