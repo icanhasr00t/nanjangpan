@@ -11,9 +11,10 @@ const vm = new Vue({
     this.fetchItems();
     // infinite scroll
     window.onscroll = () => {
-      let bottomOfWindow =
-        document.documentElement.scrollTop + window.innerHeight ===
-        document.documentElement.offsetHeight;
+      const a = Math.ceil(document.documentElement.scrollTop) + window.innerHeight;
+      const b = getDocHeight();
+		
+      const bottomOfWindow = (a == b || (a + 1 == b))
 
       if (bottomOfWindow) {
         this.start_at = this.items[this.items.length - 1].id;
@@ -35,12 +36,6 @@ const vm = new Vue({
         .get(uri, { headers})
         .then((response) => {
           this.items.push(...response.data);
-          // this.items.sort(function (a, b) {
-            // if (a.replies === b.replies) {
-              // return Date.parse(b.at) - Date.parse(a.at);
-            // }
-            // return b.replies - a.replies;
-          // });
         })
         .catch((e) => {
           triggerError();

@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -76,6 +76,7 @@
 		</div>
 		</li>
 		</ul>
+    </div>
 
     <!-- Modal -->
     <div class="modal fade" id="askPwd" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -103,15 +104,26 @@
         </div>
       </div>
     </div>
-
+<!-- container end -->
   </div>
-
   <footer id="sticky-footer" class="py-2 h-100 bg-dark text-white-50">
     <a class="text-white-50" href="#top"><div class="text-center">
       <h3> } </h3>
     </div>
 	</a>
+    <a onclick="dd()">DD</a>
   </footer>
 </body>
 <script src="list.js"></script>
+<script>
+function dd() {
+	let st = Math.ceil(document.documentElement.scrollTop);
+	let h = window.innerHeight;
+	let dc = getDocHeight();
+
+    let v = st + h;
+	var msg=`${st}, ${h}, ${dc}, ${v}`;
+	alert(msg);
+}
+</script>
 </html>
