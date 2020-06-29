@@ -22,7 +22,7 @@ test("Iframe only allowed with youtube", () => {
 test("sanitizer test - empty body", () => {
 	let testData;
     try {
-		const actual = utils.sanitizeBody(testData);
+		const actual = utils.sanitize(testData);
 		const expected = ""
 		fail('it should not reach here');
 	} catch (e) {
@@ -33,7 +33,7 @@ test("sanitizer test - empty body", () => {
 test("sanitizer test - empty body 2", () => {
 	let testData = "     ";
     try {
-		const actual = utils.sanitizeBody(testData);
+		const actual = utils.sanitize(testData);
 		const expected = ""
 		fail('it should not reach here');
 	} catch (e) {
@@ -44,7 +44,7 @@ test("sanitizer test - empty body 2", () => {
 test("sanitizer test - empty body 3", () => {
 	let testData = "<p><br></p>";
     try {
-		const actual = utils.sanitizeBody(testData);
+		const actual = utils.sanitize(testData);
 		const expected = ""
 		fail('it should not reach here');
 	} catch (e) {
@@ -54,18 +54,34 @@ test("sanitizer test - empty body 3", () => {
 
 test("sanitizer test - js events", () => {
 	const testData = `<img src="zzz" onerror = "alert('hi')"><img src="zzz" onLoad = "alert('hi')">`;
-	const actual = utils.sanitizeBody(testData);
+	const actual = utils.sanitize(testData);
 	const expected = `<img src="zzz"  = "alert('hi')"><img src="zzz"  = "alert('hi')">`;
 	expect(actual).toBe(expected);
 });
 
 test("sanitizer test - disallowed tags", () => {
-	testData = ["<script>hi</script>", "&lt;script&gt;hi&lt;script&gt;"];
+	testData = ["<script>hi</script>", "<meta><script>hi</script>"];
 	const expected = `hi`;
-
 	testData.forEach( (it) => {
-		let testData = `<script>hi</script>`;
-		const actual = utils.sanitizeBody(testData);
+		const actual = utils.sanitize(it);
 		expect(actual).toBe(expected);
 	});
+});
+
+
+test("check4EmptyStrings test - ok", () => {
+	const testData = `헌데르 달라빌ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ
+`;
+    try{
+		utils.check4EmptyStrings(testData)
+	} catch (e) {
+		fail('it should not reach here');
+	}
+
+	const testData2 = testData.replace(`헌데르 달라빌`,"");
+    try{
+		utils.check4EmptyStrings(testData2)
+		fail('it should not reach here');
+	} catch (e) {
+	}
 });

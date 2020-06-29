@@ -13,7 +13,7 @@ const { doesNotMatch } = require("assert");
 router.post(
   path,
   [
-    check("title", "invalid title").trim().isLength({ min: 2 }),
+    check("title", "invalid title").custom((v) => utils.check4EmptyStrings(v)),
     check("passwd", "invalid passwd").isLength({ min: 4 }),
     check("body", "invalid body").isLength({ min: 2 }),
   ],
@@ -30,12 +30,13 @@ router.post(
       const { title, passwd, body } = req.body;
 
       // 3. massage
-      const content = utils.sanitizeBody(body);
+	  const subject = utils.sanitize(title);
+      const content = utils.sanitize(body);
 
       // 4. insert
       const text =
         "INSERT INTO nanjangpan (passwd, at, title, body) VALUES (sha256($1), NOW(), $2, $3) RETURNING id";
-      const values = [passwd, title, content];
+      const values = [passwd, subject, content];
 
       const result = await db.query(text, values);
       return res.send(result.rows[0]);
@@ -158,7 +159,7 @@ const getMoreReplies = async (nid, start) => {
 router.put(
   `${path}/:id`,
     [ 
-	check("title", "invalid title").trim().isLength({ min: 2 }),
+    check("title", "invalid title").custom((v) => utils.check4EmptyStrings(v)),
     check("passwd", "invalid passwd").isLength({ min: 4 }),
     check("body", "invalid body").isLength({ min: 2 }),
 	],
@@ -171,7 +172,7 @@ router.put(
 
     try {
       const { title, passwd, body } = req.body;
-      const content = utils.sanitizeBody(body);
+      const content = utils.sanitize(body);
       const id = req.params.id;
       const text =
         "UPDATE nanjangpan SET title=$1, body=$2, at=NOW() WHERE id=$3 and passwd=sha256($4) RETURNING id";
@@ -192,7 +193,7 @@ router.put(
 // write a reply
 router.post(
   `${path}/:id`,
-  [check("body", "invalid body").trim().isLength({ min: 2 })],
+   [check("body", "invalid reply").custom((v) => utils.check4EmptyStrings(v))],
   async (req, res, next) => {
     try {
       utils.validate(req, res);
@@ -203,7 +204,8 @@ router.post(
     const nid = req.params.id;
     const { body } = req.body;
 
-    const replyText = body.length > 256 ? body.substring(0, 252) + "..." : body;
+	const data = utils.sanitize(body);
+    const replyText = data.length > 256 ? data.substring(0, 252) + "..." : data;
 
     try {
       const result = await db.query(
