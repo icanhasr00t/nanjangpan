@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+
+  <!-- Summer Note -->
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+
+  <script src="/shared.js"></script>
+  <link rel="stylesheet" href="/assets/some.css">
+
+  <!-- Vue -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+  <nav class="navbar text-center navbar-light bg-dark text-white-50">
+    <a class="navbar-brand mx-auto text-white-50" href="index.html">
+      <h3>{</h3>
+      <!-- <svg class="bi bi-braces" width="3em" height="3em" viewBox="0 0 16 16" fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M2.114 8.063V7.9c1.005-.102 1.497-.615 1.497-1.6V4.503c0-1.094.39-1.538 1.354-1.538h.273V2h-.376C3.25 2 2.49 2.759 2.49 4.352v1.524c0 1.094-.376 1.456-1.49 1.456v1.299c1.114 0 1.49.362 1.49 1.456v1.524c0 1.593.759 2.352 2.372 2.352h.376v-.964h-.273c-.964 0-1.354-.444-1.354-1.538V9.663c0-.984-.492-1.497-1.497-1.6zM13.886 7.9v.163c-1.005.103-1.497.616-1.497 1.6v1.798c0 1.094-.39 1.538-1.354 1.538h-.273v.964h.376c1.613 0 2.372-.759 2.372-2.352v-1.524c0-1.094.376-1.456 1.49-1.456V7.332c-1.114 0-1.49-.362-1.49-1.456V4.352C13.51 2.759 12.75 2 11.138 2h-.376v.964h.273c.964 0 1.354.444 1.354 1.538V6.3c0 .984.492 1.497 1.497 1.6z" />
+      </svg> -->
+    </a>
+  </nav>
+  <p></p>
+  <div class="container h-100 mx-auto" id="app">
+    <form id="nakseo" @submit.prevent="writeItem">
+      <div class="form-group form-row">
+        <div class="col-10">
+          <input type="text" class="form-control" id="title" name="title" v-model="nakseo.title" placeholder="제목" />
+        </div>
+        <div class="col-2 align-self-end">
+          <input type="password" class="form-control" id="passwd" name="passwd" v-model="nakseo.passwd"
+            placeholder="비밀번호" />
+        </div>
+      </div>
+      <div class="form-group form-row">
+        <div class="col-12">
+          <textarea id="summernote" class="form-control" name="content" v-model="nakseo.content"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="alert alert-danger collapse" role="alert" id="errNote">
+            으앙! 에러!
+          </div>
+        </div>
+      </div>
+      <div class="form-group form-row">
+        <div class="col-6">
+          <!-- <div style="display: block; margin-top: 10px;"> -->
+          <button type="" id="bSubmit" class="btn btn-outline-success btn-lg btn-block">
+            저장
+          </button>
+        </div>
+        <div class="col-6">
+          <button type="button" id="bCancel" class="btn btn-outline-danger btn-lg btn-block">
+            취소
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <footer id="sticky-footer" class="py-2 bg-dark text-white-50">
+    <div class="text-center">
+      <h3> } </h3>
+    </div>
+  </footer>
+</body>
+<script src="/write.js"></script>
+</html>
