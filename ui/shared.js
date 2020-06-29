@@ -7,6 +7,15 @@ $(document).ready(function () {
 
 const ENDPOINT = "https://wtf.codentalks.com/nanjangpan/"
 
+const getDocHeight = () => {
+    const D = document;
+    return Math.max(
+        D.body.scrollHeight, D.documentElement.scrollHeight,
+        D.body.offsetHeight, D.documentElement.offsetHeight,
+        D.body.clientHeight, D.documentElement.clientHeight
+    );
+};
+
 const nl2br = (str, is_xhtml) => {
     var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
     return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
