@@ -22,7 +22,7 @@
   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
-  <script src="./shared.js"></script>
+  <script src="/shared.js"></script>
   <link rel="stylesheet" href="/assets/some.css">
 
   <!-- Vue -->
@@ -30,7 +30,7 @@
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
-<body class="night">
+<body>
   <nav class="navbar text-center navbar-light bg-dark text-white-50">
     <a class="navbar-brand mx-auto text-white-50" href="index.html">
       <h3>{</h3>
@@ -38,19 +38,19 @@
   </nav>
   <p></p>
   <div class="container h-100 mx-auto" id="app">
-    <form id="nakseo" @submit.prevent="updateItem">
+    <form id="nakseo" @submit.prevent="writeItem">
       <div class="form-group form-row">
-        <div class="col-9">
-          <input type="text" class="form-control text-light bg-dark" id="title" name="title" v-model="nakseo.title" placeholder="제목" />
+        <div class="col-10">
+          <input type="text" class="form-control" id="title" name="title" v-model="nakseo.title" placeholder="제목" />
         </div>
-        <div class="col-3 align-self-end">
-          <input type="password" class="form-control text-light bg-dark" id="passwd" name="passwd" v-model="nakseo.passwd"
+        <div class="col-2 align-self-end">
+          <input type="password" class="form-control" id="passwd" name="passwd" v-model="nakseo.passwd"
             placeholder="비밀번호" />
         </div>
       </div>
       <div class="form-group form-row">
         <div class="col-12">
-          <textarea id="summernote" name="content" v-model="nakseo.content"></textarea>
+          <textarea id="summernote" class="form-control" name="content" v-model="nakseo.content"></textarea>
         </div>
       </div>
       <div class="row">
@@ -63,7 +63,7 @@
       <div class="form-group form-row">
         <div class="col-6">
           <!-- <div style="display: block; margin-top: 10px;"> -->
-          <button type="submit" id="bSubmit" class="btn btn-outline-success btn-lg btn-block">
+          <button type="" id="bSubmit" class="btn btn-outline-success btn-lg btn-block">
             저장
           </button>
         </div>
@@ -81,6 +81,5 @@
     </div>
   </footer>
 </body>
-<script src="./edit.js"></script>
-
+<script src="/write.js"></script>
 </html>
