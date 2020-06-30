@@ -78,7 +78,7 @@ const sanitize = (data) => {
     throw new Error("invalid data");
   }
 
-  const noevent = data.replace(/onerror|onabort|onload|onbeforeunload|onunload/gi,"");
+  const noevent = removeEvents(data);
   const nospecials = noevent.replace(/[\u2000-\u3000\u3164\u00A0\uFEFF]/g, '').trim();
   const content = striptags(nospecials, [
     "img",
@@ -124,14 +124,20 @@ const check4EmptyStrings = (string) => {
 	return true;
 };
 
-const charToUnicode = function(str) {
+const charToUnicode = (str) => {
   if (!str) return false; // Escaping if not exist
   var unicode = '';
   for (var i = 0, l = str.length; i < l; i++) {
     unicode += '\\' + str[i].charCodeAt(0).toString(16);
   };
   return unicode;
-}
+};
+
+const REX_EVENT_TARGET = /\s?(on[a-z]+\s*)=(\s*['"])/gi;
+const removeEvents = (str) => {
+	if (!str || str.length == 0) return "";
+	return str.replace(REX_EVENT_TARGET, "$2");
+};
 
 module.exports = {
   getFileName,
@@ -140,5 +146,7 @@ module.exports = {
   validate,
   sanitize,
   charToUnicode,
+  removeEvents, 
   check4EmptyStrings,
+  REX_EVENT_TARGET,
 };
