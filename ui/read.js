@@ -10,12 +10,12 @@ const vm = new Vue({
     },
     mounted() {
         this.getItem();
-        // infinite scroll
-        window.onscroll = () => {
-            let bottomOfWindow =
-                document.documentElement.scrollTop + window.innerHeight ===
-                document.documentElement.offsetHeight;
-
+    	// infinite scroll
+    	window.onscroll = () => {
+      		const a = Math.ceil(document.documentElement.scrollTop) + window.innerHeight;
+      		const b = getDocHeight();
+		
+      		const bottomOfWindow = (a == b || (a + 1 == b))
             if (bottomOfWindow) {
                 if (this.replies.length > 0) {
                     this.start_at = this.replies[this.replies.length - 1].id;
@@ -82,11 +82,7 @@ const vm = new Vue({
         editItem: function (id) {
             window.location.href = `/edit.html?id=${id}`;
         },
-        reply: function (event) {
-			if (event) {
-				event.preventDefault();
-        		event.stopPropagation();
-			}
+        reply: function () {
 			const rpl = this.nakseo.reply;
             this.nakseo.reply = "";
 
@@ -100,8 +96,7 @@ const vm = new Vue({
             }
             axios.post(uri, data)
                 .then((res) => {
-                    this.replies.splice(0, 0, { id: res.data.id, body: rpl });
-                    this.nakseo.reply = "";
+                    this.replies.push({ id: res.data.id, body: rpl });
                 })
                 .catch((err) => {
                     triggerError("#errReply");
