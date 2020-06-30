@@ -82,9 +82,6 @@ const vm = new Vue({
         editItem: function (id) {
             window.location.href = `/edit.html?id=${id}`;
         },
-        replyTrigger: function () {
-			this.$refs.replyBtn.click();
-		},
         reply: function () {
 			const rpl = this.nakseo.reply;
             this.nakseo.reply = "";
