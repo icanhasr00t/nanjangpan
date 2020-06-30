@@ -81,16 +81,16 @@
     <!-- Modal -->
     <div class="modal fade" id="askPwd" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
+        <div class="modal-content bg-dark">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLongTitle">비번 주세요</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close text-secondary" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
             <form id="passwdform">
-              <input type="password" class="form-control" id="passwd" name="passwd" v-model="selected.passwd">
+              <input type="password" class="form-control bg-dark text-light" id="passwd" name="passwd" v-model="selected.passwd">
               <input type="hidden" id="nid" name="nid" v-model="selected.nid">
             </form>
           </div>
