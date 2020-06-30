@@ -2,6 +2,8 @@
 
 const { validationResult } = require("express-validator");
 const striptags = require("striptags");
+const createDOMPurify = require('dompurify');
+const { JSDOM } = require('jsdom');
 
 const isSafeFile = (file) => {
   if (file && file.mimetype) {
@@ -78,8 +80,8 @@ const sanitize = (data) => {
     throw new Error("invalid data");
   }
 
-  const noevent = removeEvents(data);
-  const nospecials = noevent.replace(/[\u2000-\u3000\u3164\u00A0\uFEFF]/g, '').trim();
+  // const noevent = removeEvents(data);
+  const nospecials = data.replace(/[\u2000-\u3000\u3164\u00A0\uFEFF]/g, '').trim();
   const content = striptags(nospecials, [
     "img",
     "iframe",
@@ -113,7 +115,10 @@ const sanitize = (data) => {
     throw new Error("invalid body");
   }
 
-  return content;
+  const DOMPurify = createDOMPurify(new JSDOM('').window);
+  const clean = DOMPurify.sanitize(content);
+
+  return clean;
 };
 
 const check4EmptyStrings = (string) => {
@@ -133,12 +138,6 @@ const charToUnicode = (str) => {
   return unicode;
 };
 
-const REX_EVENT_TARGET = /\s?(on[a-z]+\s*)=(\s*['"])/gi;
-const removeEvents = (str) => {
-	if (!str || str.length == 0) return "";
-	return str.replace(REX_EVENT_TARGET, "$2");
-};
-
 module.exports = {
   getFileName,
   isSafeFile,
@@ -146,7 +145,5 @@ module.exports = {
   validate,
   sanitize,
   charToUnicode,
-  removeEvents, 
   check4EmptyStrings,
-  REX_EVENT_TARGET,
 };
