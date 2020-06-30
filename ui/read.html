@@ -94,10 +94,10 @@
 
             <!-- 댓글 -->
             <div class="input-group">
-                <input id="replyText" maxlength="256" v-on:keydown.enter="reply($event)" @keypress.enter.prevent v-model="nakseo.reply" type="text" class="form-control bg-dark text-light"
+                <input id="replyText" maxlength="256" @keypress.enter.prevent="reply" v-model="nakseo.reply" type="text" class="form-control bg-dark text-light"
                     placeholder="댓글 쓰셈" aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" v-on:click="reply()">
+                    <button id="replyBtn" class="btn btn-outline-secondary" type="button" v-on:click="reply()">
                         <span id="imgReply" title="댓글">
                             <svg class="bi bi-arrow-return-right" width="1em" height="1em" viewBox="0 0 16 16"
                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">

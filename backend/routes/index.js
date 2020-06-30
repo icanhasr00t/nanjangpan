@@ -115,8 +115,8 @@ router.get(
     try {
       const text = `SELECT n.id, n.at, title, n.body, r.body as rbody, r.at as rat, r.id as rid 
     FROM nanjangpan n LEFT JOIN reply r ON n.id = r.nid 
-    WHERE n.id = $1 ORDER BY rat DESC 
-    LIMIT 10`;
+    WHERE n.id = $1 ORDER BY rat ASC 
+    LIMIT 20`;
       const result = await db.query(text, [id]);
       if (result.rows.length <= 0) {
         return res.status(404).end();
@@ -149,7 +149,7 @@ router.get(
 );
 
 const getMoreReplies = async (nid, start) => {
-  const text = "SELECT id, body FROM reply WHERE nid = $1 AND id < $2 ORDER BY at DESC LIMIT 20";
+  const text = "SELECT id, body FROM reply WHERE nid = $1 AND id > $2 ORDER BY at ASC LIMIT 20";
   const result = await db.query(text, [nid, start]);
   return result.rows
 };
