@@ -13,7 +13,7 @@
     "debug": "~2.6.9",
     "dompurify": "^2.0.12",
     "express": "~4.16.1",
-    "express-fileupload": "^1.1.7-alpha.3",
+    "express-fileupload": "^1.1.9",
     "express-validator": "^6.5.0",
     "helmet": "^3.23.1",
     "morgan": "~1.9.1",
