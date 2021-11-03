@@ -18,7 +18,7 @@
     "helmet": "^3.23.1",
     "morgan": "~1.9.1",
     "pg": "^8.2.1",
-    "striptags": "^3.1.1"
+    "striptags": "^3.2.0"
   },
   "devDependencies": {
     "jest": "^26.0.1",
